@@ -41,6 +41,7 @@
         width: 20px;
         height: 20px;
         background-size: cover;
+        opacity: 75%;
       }
       div.pacman {
         background-image: url("pacman-images/pactiles/pacleft.gif");
@@ -50,7 +51,7 @@
         width: 50px;
         height: 50px;
       }
-      div.ghost1 {
+      div.ghost {
         background-image: url("pacman-images/pactiles/ghost1.png");
         background-repeat: no-repeat;
         background-position: center;
@@ -93,31 +94,61 @@
         text-shadow: 3px 3px 0 #f00, 6px 6px 0 #0f0, 9px 9px 0 #00f;
         animation: pacAnimation 0.5s infinite alternate;
       }
+      .button {
+        background: none;
+        border: none;
+        padding: 0;
+        top: 30%;
+        text-align: center;
+        cursor: pointer;
+        position: absolute;
+        color: #f1eeee; /* Text color */
+        font-family: "Press Start 2P", cursive;
+        font-size: 60px;
+        text-decoration: underline; /* Underline the text, if desired */
+        text-transform: uppercase;
+        color: yellow;
+        text-shadow: 3px 3px 0 #f00, 6px 6px 0 #0f0, 9px 9px 0 #00f;
+        animation: pacAnimation 0.5s infinite alternate;
+      }
     </style>
   </head>
   <body>
     <div id="points" class="points"></div>
     <div class="pacmanText">Pacman</div>
     <div id="world"></div>
+    <div class="pacmanText" id="textRemove" style="top: 250px; left: 35%; font-size: 100px">
+      Difficulty
+    </div>
+    <button class="button" onclick='button("easy")' style="top: 400px">
+      Easy
+    </button>
+    <button class="button" onclick='button("medium")' style="top: 500px">
+      Medium
+    </button>
+    <button class="button" onclick='button("hard")' style="top: 600px">
+      Hard
+    </button>
+
     <script type="text/javascript">
       let world = [
         [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
         [2, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
         [2, 1, 2, 1, 1, 1, 1, 5, 1, 1, 1, 1, 1, 5, 1, 1, 1, 1, 2, 1, 2],
-        [2, 1, 2, 1, 2, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 2, 1, 2, 1, 2],
+        [2, 1, 2, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 2, 1, 2],
         [2, 1, 2, 1, 2, 2, 1, 1, 2, 1, 1, 1, 2, 1, 1, 2, 2, 1, 2, 1, 2],
         [2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2],
         [2, 1, 2, 1, 1, 1, 2, 1, 1, 2, 1, 2, 1, 1, 2, 1, 1, 1, 2, 1, 2],
-        [2, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 2],
-        [2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 4, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2],
-        [2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2],
-        [2, 1, 2, 1, 1, 1, 2, 1, 1, 2, 2, 2, 1, 1, 2, 1, 1, 1, 2, 1, 2],
+        [2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2],
+        [2, 1, 2, 1, 5, 1, 2, 1, 1, 4, 1, 4, 1, 1, 2, 1, 5, 1, 2, 1, 2],
+        [2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2],
+        [2, 1, 2, 1, 1, 1, 2, 1, 1, 2, 1, 2, 1, 1, 2, 1, 1, 1, 2, 1, 2],
         [2, 1, 2, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 2, 1, 2],
-        [2, 1, 2, 1, 2, 2, 1, 5, 2, 2, 1, 2, 2, 5, 1, 2, 2, 1, 2, 1, 2],
+        [2, 1, 2, 1, 2, 2, 1, 5, 2, 1, 1, 1, 2, 5, 1, 2, 2, 1, 2, 1, 2],
         [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
         [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
       ];
-
+      var difficulty;
       let pacman = {
         x: 1,
         y: 1,
@@ -125,8 +156,70 @@
 
       let ghost1 = {
         x: 8,
+        y: 9,
+      };
+      let ghost2 = {
+        x: 8,
+        y: 11,
+      };
+      let ghost3 = {
+        x: 8,
         y: 10,
       };
+      let ghost4 = {
+        x: 9,
+        y: 10,
+      };
+
+      function button(diff) {
+        if (diff == "easy") {
+          setInterval(function () {
+            moveGhost(ghost1);
+          }, 200);
+          console.log(difficulty)
+          setInterval(function () {
+            moveGhost(ghost2);
+          }, 300);
+        } else if (diff == "medium") {
+          setInterval(function () {
+            moveGhost(ghost1);
+          }, 200);
+          setInterval(function () {
+            moveGhost(ghost2);
+          }, 300);
+          setInterval(function () {
+            moveGhost(ghost3);
+          }, 400);
+        } else if (diff== "hard") {
+          setInterval(function () {
+            moveGhost(ghost1);
+          }, 200);
+          setInterval(function () {
+            moveGhost(ghost2);
+          }, 300);
+          setInterval(function () {
+            moveGhost(ghost3);
+          }, 400);
+          setInterval(function () {
+            moveGhost(ghost4);
+          }, 500);
+        }
+        var buttons = document.getElementsByClassName("button");
+
+        for (var i = buttons.length - 1; i >= 0; i--) {
+          var button = buttons[i];
+          button.parentNode.removeChild(button);
+        }
+
+        var textElement = document.getElementById("textRemove");
+
+        if (textElement) {
+          // Remove the text by setting the element's innerHTML to an empty string
+          textElement.innerHTML = "";
+        }
+      }
+      
+
       // comment
       function displayWorld() {
         let output = "";
@@ -139,11 +232,11 @@
             } else if (world[x][y] == 1) {
               output += "\n\t<div class ='coins'></div>";
             } else if (world[x][y] == 3) {
-              output += "\n\t<div class ='pacman' id ='pacman'></div>";
+              output += "\n\t<div class ='pacman'></div>";
             } else if (world[x][y] == 0) {
               output += "\n\t<div class ='blank'></div>";
             } else if (world[x][y] == 4) {
-              output += "\n\t<div class ='ghost1'></div>";
+              output += "\n\t<div class ='ghost'></div>";
             } else if (world[x][y] == 5) {
               output += "\n\t<div class ='banana'></div>";
             }
@@ -152,11 +245,20 @@
         }
         document.getElementById("world").innerHTML = output;
       }
-
       displayWorld();
+
       let points = 0;
+
+
       document.getElementById("points").textContent = "Points: " + points;
+
+      // Button Difficulty //
+
       document.onkeydown = function (event) {
+        if (points >= 50){
+          window.location.reload(true);
+          alert("You win")
+        }
         if (event.key == "ArrowLeft" && world[pacman.x][pacman.y - 1] != 2) {
           // LEFT
           if (world[pacman.x][pacman.y - 1] == 1) {
@@ -209,61 +311,54 @@
         }
         displayWorld();
         document.getElementById("points").textContent = "Points: " + points;
-
-        if (world[pacman.x][pacman.y] == world[ghost1.x][ghost1.y]) {
-          window.location.reload(true);
-          alert("You lose");
-        }
       };
-      setInterval(moveGhost, 200);
 
-      function moveGhost() {
+      function moveGhost(ghost) {
         const randomInt = Math.floor(Math.random() * 4) + 1;
         // LEFT
-        console.log(randomInt);
         if (randomInt == 1) {
-          let prev = world[ghost1.x - 1][ghost1.y];
+          let prev = world[ghost.x - 1][ghost.y];
           if (prev == 2 || prev == 4) return;
-          ghost1.x--;
-          if (world[ghost1.x][ghost1.y] == 3) {
+          ghost.x--;
+          if (world[ghost.x][ghost.y] == 3) {
             window.location.reload(true);
             alert("You lose");
           }
-          world[ghost1.x][ghost1.y] = 4;
-          world[ghost1.x + 1][ghost1.y] = prev;
+          world[ghost.x][ghost.y] = 4;
+          world[ghost.x + 1][ghost.y] = prev;
           // RIGHT
         } else if (randomInt == 2) {
-          let prev = world[ghost1.x + 1][ghost1.y];
+          let prev = world[ghost.x + 1][ghost.y];
           if (prev == 2 || prev == 4) return;
-          ghost1.x++;
-          if (world[ghost1.x][ghost1.y] == 3) {
+          ghost.x++;
+          if (world[ghost.x][ghost.y] == 3) {
             window.location.reload(true);
             alert("You lose");
           }
-          world[ghost1.x][ghost1.y] = 4;
-          world[ghost1.x - 1][ghost1.y] = prev;
+          world[ghost.x][ghost.y] = 4;
+          world[ghost.x - 1][ghost.y] = prev;
           // DOWN
         } else if (randomInt == 3) {
-          let prev = world[ghost1.x][ghost1.y - 1];
+          let prev = world[ghost.x][ghost.y - 1];
           if (prev == 2 || prev == 4) return;
-          ghost1.y--;
-          if (world[ghost1.x][ghost1.y] == 3) {
+          ghost.y--;
+          if (world[ghost.x][ghost.y] == 3) {
             window.location.reload(true);
             alert("You lose");
           }
-          world[ghost1.x][ghost1.y] = 4;
-          world[ghost1.x][ghost1.y + 1] = prev;
+          world[ghost.x][ghost.y] = 4;
+          world[ghost.x][ghost.y + 1] = prev;
           // UP
         } else if (randomInt == 4) {
-          let prev = world[ghost1.x][ghost1.y + 1];
+          let prev = world[ghost.x][ghost.y + 1];
           if (prev == 2 || prev == 4) return;
-          ghost1.y++;
-          if (world[ghost1.x][ghost1.y] == 3) {
+          ghost.y++;
+          if (world[ghost.x][ghost.y] == 3) {
             window.location.reload(true);
             alert("You lose");
           }
-          world[ghost1.x][ghost1.y] = 4;
-          world[ghost1.x][ghost1.y - 1] = prev;
+          world[ghost.x][ghost.y] = 4;
+          world[ghost.x][ghost.y - 1] = prev;
         }
         displayWorld();
       }
