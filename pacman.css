@@ -1,0 +1,105 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+  }
+  body {
+    padding: 0px;
+    margin: 0px;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 110vh;
+    margin: 0;
+  }
+  div.row div {
+    width: 50px;
+    border: 1px solid black;
+    height: 50px;
+    display: inline-block;
+  }
+  div.bricks {
+    background-color: blue;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+  }
+  div.coins {
+    background-image: url("pacman-images/pactiles/coins.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+    opacity: 75%;
+  }
+  #pacman {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+  }
+  div.ghost {
+    background-image: url("pacman-images/pactiles/ghost1.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+  }
+  div.blank {
+    width: 50px;
+    height: 50px;
+  }
+  div.banana {
+    background-image: url("pacman-images/pactiles/banana.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+  }
+  div.points {
+    font-size: xx-large;
+    position: absolute;
+    top: 15%;
+    left: 5%;
+    background-color: #000;
+    font-family: "Press Start 2P", cursive;
+    color: #0f0; /* Set text color to green */
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    text-shadow: 3px 3px 0 #f00;
+  }
+  div.pacmanText {
+    font-family: "Press Start 2P", cursive;
+    font-size: 100px;
+    position: absolute;
+    top: -2.5%;
+    left: 40%;
+    text-transform: uppercase;
+    color: yellow;
+    text-shadow: 3px 3px 0 #f00, 6px 6px 0 #0f0, 9px 9px 0 #00f;
+    animation: pacAnimation 0.5s infinite alternate;
+  }
+  .button {
+    background: none;
+    border: none;
+    padding: 0;
+    top: 30%;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    color: #f1eeee; /* Text color */
+    font-family: "Press Start 2P", cursive;
+    font-size: 60px;
+    text-decoration: underline; /* Underline the text, if desired */
+    text-transform: uppercase;
+    color: yellow;
+    text-shadow: 3px 3px 0 #f00, 6px 6px 0 #0f0, 9px 9px 0 #00f;
+    animation: pacAnimation 0.5s infinite alternate;
+  }
